@@ -1,0 +1,25 @@
+[project]
+name = "strawchemy-migrated-project"
+version = "0.1.0"
+description = "Strawberry GraphQL project migrated from strawberry-sqlalchemy-mapper to strawchemy"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "strawberry-graphql[fastapi]",
+    "strawchemy",
+    "sqlalchemy",
+    "uvicorn",
+    "aiosqlite",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-mock>=3.14",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"

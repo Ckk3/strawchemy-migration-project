@@ -1,0 +1,25 @@
+[project]
+name = "strawberry-sqlalchemy-project"
+version = "0.1.0"
+description = "Simple strawberry-sqlalchemy project for migration study"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "strawberry-graphql[fastapi]",
+    "strawberry-sqlalchemy-mapper",
+    "sqlalchemy",
+    "uvicorn",
+    "aiosqlite",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-mock>=3.14",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
