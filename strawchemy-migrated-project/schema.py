@@ -18,7 +18,7 @@ strawchemy = Strawchemy(
 )
 
 
-@strawchemy.type(models.Department, include="all")
+@strawchemy.type(models.Department, include="all", override=True)
 class DepartmentType:
     """GraphQL type for Department model."""
 
