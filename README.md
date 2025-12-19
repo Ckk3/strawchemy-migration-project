@@ -10,6 +10,8 @@ This project demonstrates migrating from `strawberry-sqlalchemy-mapper` to `stra
 | Type generation from models | Yes | Yes |
 | Automatic resolvers | Limited | Yes |
 | Field exclusion | Yes (`__exclude__`) | Yes (`exclude=[]`) |
+| Relationship loading | Yes (via loader) | Yes |
+| Secondary Tables Relationship | No | **NEED TO CHECK** |
 | **Pagination** | | |
 | Relay (cursor-based) | Yes | No |
 | Offset pagination | No | Yes |
