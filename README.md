@@ -1,6 +1,6 @@
 # Strawberry-SQLAlchemy to Strawchemy Migration Project
 
-This project demonstrates migrating from `strawberry-sqlalchemy-mapper` to `strawchemy` - two libraries that integrate Strawberry GraphQL with SQLAlchemy.
+This project demonstrates migrating from [`strawberry-sqlalchemy-mapper`](https://github.com/strawberry-graphql/strawberry-sqlalchemy) to [`strawchemy`](https://github.com/gazorby/strawchemy) - two libraries that integrate Strawberry GraphQL with SQLAlchemy.
 
 
 ## Feature Comparison
