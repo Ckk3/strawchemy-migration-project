@@ -12,12 +12,12 @@ strawberry_sqlalchemy_mapper = StrawberrySQLAlchemyMapper()
 
 
 @strawberry_sqlalchemy_mapper.type(models.Department)
-class Department:
+class DepartmentType:
     pass
 
 
 @strawberry_sqlalchemy_mapper.type(models.Employee)
-class Employee:
+class EmployeeType:
     # Exclude sensitive fields from the GraphQL schema
     __exclude__ = ["password_hash"]
 
@@ -25,12 +25,12 @@ class Employee:
 @strawberry.type
 class Query:
     @strawberry.field
-    def departments(self) -> List[Department]:
+    def departments(self) -> List[DepartmentType]:
         session = get_session()
         return session.scalars(select(models.Department)).all()
 
     @strawberry.field
-    def employees(self) -> List[Employee]:
+    def employees(self) -> List[EmployeeType]:
         session = get_session()
         return session.scalars(select(models.Employee)).all()
 

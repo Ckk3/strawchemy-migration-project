@@ -1,0 +1,95 @@
+schema {
+  query: QueryWithRelay
+}
+
+type Department {
+  id: String!
+  name: String!
+  employees(first: Int = null, after: String = null, last: Int = null, before: String = null): EmployeeConnection!
+}
+
+type DepartmentRelayConnection {
+  edges: [DepartmentRelayEdge!]!
+  pageInfo: RelayPageInfo!
+}
+
+type DepartmentRelayEdge {
+  cursor: String!
+  node: DepartmentType!
+}
+
+type DepartmentType {
+  id: String!
+  name: String!
+  employees(first: Int = null, after: String = null, last: Int = null, before: String = null): EmployeeConnection!
+}
+
+type Employee {
+  id: String!
+  name: String!
+  email: String!
+  passwordHash: String!
+  departmentId: String
+  department: Department
+}
+
+type EmployeeConnection {
+  """Pagination data for this connection"""
+  pageInfo: PageInfo!
+  edges: [EmployeeEdge!]!
+}
+
+type EmployeeEdge {
+  """A cursor for use in pagination"""
+  cursor: String!
+
+  """The item at the end of the edge"""
+  node: Employee!
+}
+
+type EmployeeRelayConnection {
+  edges: [EmployeeRelayEdge!]!
+  pageInfo: RelayPageInfo!
+}
+
+type EmployeeRelayEdge {
+  cursor: String!
+  node: EmployeeType!
+}
+
+type EmployeeType {
+  id: String!
+  name: String!
+  email: String!
+  departmentId: String
+  department: Department
+}
+
+"""Information to aid in pagination."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type QueryWithRelay {
+  departmentsConnection(first: Int = null, after: String = null, last: Int = null, before: String = null): DepartmentRelayConnection!
+  employeesConnection(first: Int = null, after: String = null): EmployeeRelayConnection!
+  departments: [DepartmentType!]!
+  employees: [EmployeeType!]!
+}
+
+type RelayPageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}

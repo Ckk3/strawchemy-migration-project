@@ -25,7 +25,7 @@ class TestEmployeeType:
     def test_employee_has_expected_fields(self):
         query = """
         {
-            __type(name: "Employee") {
+            __type(name: "EmployeeType") {
                 fields {
                     name
                 }
@@ -45,7 +45,7 @@ class TestEmployeeType:
     def test_password_hash_is_excluded(self):
         query = """
         {
-            __type(name: "Employee") {
+            __type(name: "EmployeeType") {
                 fields {
                     name
                 }
@@ -65,7 +65,7 @@ class TestDepartmentType:
     def test_department_has_expected_fields(self):
         query = """
         {
-            __type(name: "Department") {
+            __type(name: "DepartmentType") {
                 fields {
                     name
                 }
@@ -86,7 +86,7 @@ class TestSchemaIntrospection:
     def test_introspect_employee_fields(self):
         query = """
         {
-            __type(name: "Employee") {
+            __type(name: "EmployeeType") {
                 name
                 fields {
                     name
@@ -97,7 +97,7 @@ class TestSchemaIntrospection:
         result = schema.execute_sync(query)
 
         assert result.errors is None
-        assert result.data["__type"]["name"] == "Employee"
+        assert result.data["__type"]["name"] == "EmployeeType"
         
         field_names = [f["name"] for f in result.data["__type"]["fields"]]
         assert "id" in field_names
@@ -109,7 +109,7 @@ class TestSchemaIntrospection:
     def test_introspect_department_fields(self):
         query = """
         {
-            __type(name: "Department") {
+            __type(name: "DepartmentType") {
                 name
                 fields {
                     name
@@ -120,7 +120,7 @@ class TestSchemaIntrospection:
         result = schema.execute_sync(query)
 
         assert result.errors is None
-        assert result.data["__type"]["name"] == "Department"
+        assert result.data["__type"]["name"] == "DepartmentType"
 
         field_names = [f["name"] for f in result.data["__type"]["fields"]]
         assert "id" in field_names

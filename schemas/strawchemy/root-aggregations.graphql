@@ -1,0 +1,88 @@
+schema {
+  query: QueryWithRootAggregations
+}
+
+"""Aggregation fields"""
+type DepartmentAggregate {
+  count: Int
+  max: DepartmentMinMaxFields!
+  min: DepartmentMinMaxFields!
+  sum: DepartmentSumFields!
+}
+
+"""GraphQL type"""
+type DepartmentAggregationType {
+  nodes: [DepartmentType!]!
+  aggregations: DepartmentAggregate!
+}
+
+"""GraphQL type"""
+type DepartmentMinMaxFields {
+  id: String
+  name: String
+}
+
+"""GraphQL type"""
+type DepartmentSumFields {
+  id: String
+  name: String
+}
+
+"""GraphQL type"""
+type DepartmentType {
+  employeesAggregate: EmployeeAggregate!
+
+  """Fetch objects from the EmployeeType collection"""
+  employees: [EmployeeType!]!
+  id: String!
+  name: String!
+}
+
+"""Aggregation fields"""
+type EmployeeAggregate {
+  count: Int
+  max: EmployeeMinMaxFields!
+  min: EmployeeMinMaxFields!
+  sum: EmployeeSumFields!
+}
+
+"""GraphQL type"""
+type EmployeeAggregationType {
+  nodes: [EmployeeType!]!
+  aggregations: EmployeeAggregate!
+}
+
+"""GraphQL type"""
+type EmployeeMinMaxFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""GraphQL type"""
+type EmployeeSumFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""GraphQL type"""
+type EmployeeType {
+  department: DepartmentType!
+  id: String!
+  name: String!
+  email: String!
+  departmentId: String!
+}
+
+type QueryWithRootAggregations {
+  """Fetch aggregation data from the EmployeeType collection"""
+  employeesAggregations: EmployeeAggregationType!
+
+  """Fetch aggregation data from the DepartmentType collection"""
+  departmentsAggregations: DepartmentAggregationType!
+}
