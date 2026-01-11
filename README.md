@@ -187,7 +187,7 @@ type Query {
 
 > **Note on nullable fields:** The SQLAlchemy model defines `department_id` without `nullable=False`, making it nullable. However, the libraries interpret this differently:
 > - **strawberry-sqlalchemy-mapper** generates `departmentId: String` (nullable) - matches the model
-> - **strawchemy** generates `departmentId: String!` (non-null) - does not match the model
+> - **strawchemy** generates `departmentId: String!` (non-null) - matches the typehint (look [issue 151](https://github.com/gazorby/strawchemy/issues/151))
 >
 > This is a library behavior difference, not a configuration choice.
 
