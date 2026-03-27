@@ -1,0 +1,272 @@
+schema {
+  query: QueryWithFilters
+}
+
+"""
+Boolean expression to compare aggregated fields. All fields are combined with logical 'AND'.
+"""
+input DepartmentAggregateBoolExp {
+  count: DepartmentAggregateBoolExpCount
+  maxString: DepartmentAggregateBoolExpMaxstring
+  minString: DepartmentAggregateBoolExpMinstring
+  sum: DepartmentAggregateBoolExpSum
+}
+
+"""Boolean expression to compare count aggregation."""
+input DepartmentAggregateBoolExpCount {
+  arguments: [DepartmentCountFields!] = []
+  predicate: IntOrderComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare max aggregation."""
+input DepartmentAggregateBoolExpMaxstring {
+  arguments: [DepartmentMinMaxStringFieldsEnum!]!
+  predicate: TextComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare min aggregation."""
+input DepartmentAggregateBoolExpMinstring {
+  arguments: [DepartmentMinMaxStringFieldsEnum!]!
+  predicate: TextComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare sum aggregation."""
+input DepartmentAggregateBoolExpSum {
+  arguments: [DepartmentSumFieldsEnum!]!
+  predicate: FloatOrderComparison!
+  distinct: Boolean = false
+}
+
+"""
+Boolean expression to compare fields. All fields are combined with logical 'AND'.
+"""
+input DepartmentBoolExp {
+  _and: [DepartmentBoolExp!]! = []
+  _or: [DepartmentBoolExp!]! = []
+  _not: DepartmentBoolExp
+  employeesAggregate: EmployeeAggregateBoolExp
+  employees: EmployeeFilter
+  id: TextComparison
+  name: TextComparison
+}
+
+enum DepartmentCountFields {
+  id
+  name
+}
+
+"""
+Boolean expression to compare fields. All fields are combined with logical 'AND'.
+"""
+input DepartmentFilter {
+  _and: [DepartmentFilter!]! = []
+  _or: [DepartmentFilter!]! = []
+  not_: DepartmentFilter
+  employeesAggregate: EmployeeAggregateBoolExp
+  employees: EmployeeFilter
+  id: TextComparison
+  name: TextComparison
+}
+
+enum DepartmentMinMaxStringFieldsEnum {
+  id
+  name
+}
+
+enum DepartmentSumFieldsEnum {
+  id
+  name
+}
+
+"""GraphQL type"""
+type DepartmentType {
+  employeesAggregate: EmployeeAggregate!
+
+  """Fetch objects from the EmployeeType collection"""
+  employees: [EmployeeType!]!
+  id: String!
+  name: String!
+}
+
+"""Aggregation fields"""
+type EmployeeAggregate {
+  count: Int
+  max: EmployeeMinMaxFields!
+  min: EmployeeMinMaxFields!
+  sum: EmployeeSumFields!
+}
+
+"""
+Boolean expression to compare aggregated fields. All fields are combined with logical 'AND'.
+"""
+input EmployeeAggregateBoolExp {
+  count: EmployeeAggregateBoolExpCount
+  maxString: EmployeeAggregateBoolExpMaxstring
+  minString: EmployeeAggregateBoolExpMinstring
+  sum: EmployeeAggregateBoolExpSum
+}
+
+"""Boolean expression to compare count aggregation."""
+input EmployeeAggregateBoolExpCount {
+  arguments: [EmployeeCountFields!] = []
+  predicate: IntOrderComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare max aggregation."""
+input EmployeeAggregateBoolExpMaxstring {
+  arguments: [EmployeeMinMaxStringFieldsEnum!]!
+  predicate: TextComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare min aggregation."""
+input EmployeeAggregateBoolExpMinstring {
+  arguments: [EmployeeMinMaxStringFieldsEnum!]!
+  predicate: TextComparison!
+  distinct: Boolean = false
+}
+
+"""Boolean expression to compare sum aggregation."""
+input EmployeeAggregateBoolExpSum {
+  arguments: [EmployeeSumFieldsEnum!]!
+  predicate: FloatOrderComparison!
+  distinct: Boolean = false
+}
+
+enum EmployeeCountFields {
+  id
+  name
+  email
+  passwordHash
+  departmentId
+}
+
+"""
+Boolean expression to compare fields. All fields are combined with logical 'AND'.
+"""
+input EmployeeFilter {
+  _and: [EmployeeFilter!]! = []
+  _or: [EmployeeFilter!]! = []
+  _not: EmployeeFilter
+  departmentAggregate: DepartmentAggregateBoolExp
+  department: DepartmentBoolExp
+  id: TextComparison
+  name: TextComparison
+  email: TextComparison
+  passwordHash: TextComparison
+  departmentId: TextComparison
+}
+
+"""GraphQL type"""
+type EmployeeMinMaxFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+enum EmployeeMinMaxStringFieldsEnum {
+  id
+  name
+  email
+  passwordHash
+  departmentId
+}
+
+"""GraphQL type"""
+type EmployeeSumFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+enum EmployeeSumFieldsEnum {
+  id
+  name
+  email
+  passwordHash
+  departmentId
+}
+
+"""GraphQL type"""
+type EmployeeType {
+  department: DepartmentType!
+  id: String!
+  name: String!
+  email: String!
+  departmentId: String!
+}
+
+"""
+Boolean expression to compare fields supporting order comparisons. All fields are combined with logical 'AND'
+"""
+input FloatOrderComparison {
+  eq: Float
+  neq: Float
+  isNull: Boolean
+  in: [Float!]
+  nin: [Float!]
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+}
+
+"""
+Boolean expression to compare fields supporting order comparisons. All fields are combined with logical 'AND'
+"""
+input IntOrderComparison {
+  eq: Int
+  neq: Int
+  isNull: Boolean
+  in: [Int!]
+  nin: [Int!]
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+}
+
+type QueryWithFilters {
+  """Fetch objects from the EmployeeType collection"""
+  employeesFiltered(filter: EmployeeFilter = null): [EmployeeType!]!
+
+  """Fetch objects from the DepartmentType collection"""
+  departmentsFiltered(filter: DepartmentFilter = null): [DepartmentType!]!
+}
+
+"""
+Boolean expression to compare String fields. All fields are combined with logical 'AND'
+"""
+input TextComparison {
+  eq: String
+  neq: String
+  isNull: Boolean
+  in: [String!]
+  nin: [String!]
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  nlike: String
+  ilike: String
+  nilike: String
+  regexp: String
+  iregexp: String
+  nregexp: String
+  inregexp: String
+  startswith: String
+  endswith: String
+  contains: String
+  istartswith: String
+  iendswith: String
+  icontains: String
+}

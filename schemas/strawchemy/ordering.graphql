@@ -1,0 +1,128 @@
+schema {
+  query: QueryWithOrdering
+}
+
+input DepartmentAggregateMinMaxStringFieldsOrderBy {
+  id: OrderByEnum!
+  name: OrderByEnum!
+}
+
+input DepartmentAggregateNumericFieldsOrderBy {
+  id: OrderByEnum!
+  name: OrderByEnum!
+}
+
+input DepartmentAggregateOrderBy {
+  count: OrderByEnum
+  maxString: DepartmentAggregateMinMaxStringFieldsOrderBy
+  minString: DepartmentAggregateMinMaxStringFieldsOrderBy
+  sum: DepartmentAggregateNumericFieldsOrderBy
+}
+
+"""
+Boolean expression to compare fields. All fields are combined with logical 'AND'.
+"""
+input DepartmentOrderBy {
+  employeesAggregate: EmployeeAggregateOrderBy
+  employees: EmployeeOrderBy
+  id: OrderByEnum
+  name: OrderByEnum
+}
+
+"""GraphQL type"""
+type DepartmentType {
+  employeesAggregate: EmployeeAggregate!
+
+  """Fetch objects from the EmployeeType collection"""
+  employees: [EmployeeType!]!
+  id: String!
+  name: String!
+}
+
+"""Aggregation fields"""
+type EmployeeAggregate {
+  count: Int
+  max: EmployeeMinMaxFields!
+  min: EmployeeMinMaxFields!
+  sum: EmployeeSumFields!
+}
+
+input EmployeeAggregateMinMaxStringFieldsOrderBy {
+  id: OrderByEnum!
+  name: OrderByEnum!
+  email: OrderByEnum!
+  passwordHash: OrderByEnum!
+  departmentId: OrderByEnum!
+}
+
+input EmployeeAggregateNumericFieldsOrderBy {
+  id: OrderByEnum!
+  name: OrderByEnum!
+  email: OrderByEnum!
+  passwordHash: OrderByEnum!
+  departmentId: OrderByEnum!
+}
+
+input EmployeeAggregateOrderBy {
+  count: OrderByEnum
+  maxString: EmployeeAggregateMinMaxStringFieldsOrderBy
+  minString: EmployeeAggregateMinMaxStringFieldsOrderBy
+  sum: EmployeeAggregateNumericFieldsOrderBy
+}
+
+"""GraphQL type"""
+type EmployeeMinMaxFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""
+Boolean expression to compare fields. All fields are combined with logical 'AND'.
+"""
+input EmployeeOrderBy {
+  departmentAggregate: DepartmentAggregateOrderBy
+  department: DepartmentOrderBy
+  id: OrderByEnum
+  name: OrderByEnum
+  email: OrderByEnum
+  passwordHash: OrderByEnum
+  departmentId: OrderByEnum
+}
+
+"""GraphQL type"""
+type EmployeeSumFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""GraphQL type"""
+type EmployeeType {
+  department: DepartmentType!
+  id: String!
+  name: String!
+  email: String!
+  departmentId: String!
+}
+
+enum OrderByEnum {
+  ASC
+  ASC_NULLS_FIRST
+  ASC_NULLS_LAST
+  DESC
+  DESC_NULLS_FIRST
+  DESC_NULLS_LAST
+}
+
+type QueryWithOrdering {
+  """Fetch objects from the EmployeeType collection"""
+  employeesOrdered(orderBy: [EmployeeOrderBy!] = null): [EmployeeType!]!
+
+  """Fetch objects from the DepartmentType collection"""
+  departmentsOrdered(orderBy: [DepartmentOrderBy!] = null): [DepartmentType!]!
+}

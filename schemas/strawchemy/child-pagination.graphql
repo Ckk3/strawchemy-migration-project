@@ -1,0 +1,63 @@
+schema {
+  query: QueryWithChildPagination
+}
+
+"""GraphQL type"""
+type DepartmentType {
+  employeesAggregate: EmployeeAggregate!
+
+  """Fetch objects from the EmployeeType collection"""
+  employees: [EmployeeType!]!
+  id: String!
+  name: String!
+}
+
+"""GraphQL type"""
+type DepartmentTypeWithChildPagination {
+  employeesAggregate: EmployeeAggregate!
+
+  """Fetch objects from the EmployeeType collection"""
+  employees(limit: Int = 100, offset: Int! = 0): [EmployeeType!]!
+  id: String!
+  name: String!
+}
+
+"""Aggregation fields"""
+type EmployeeAggregate {
+  count: Int
+  max: EmployeeMinMaxFields!
+  min: EmployeeMinMaxFields!
+  sum: EmployeeSumFields!
+}
+
+"""GraphQL type"""
+type EmployeeMinMaxFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""GraphQL type"""
+type EmployeeSumFields {
+  id: String
+  name: String
+  email: String
+  passwordHash: String
+  departmentId: String
+}
+
+"""GraphQL type"""
+type EmployeeType {
+  department: DepartmentType!
+  id: String!
+  name: String!
+  email: String!
+  departmentId: String!
+}
+
+type QueryWithChildPagination {
+  """Fetch objects from the DepartmentTypeWithChildPagination collection"""
+  departmentsWithChildPagination: [DepartmentTypeWithChildPagination!]!
+}

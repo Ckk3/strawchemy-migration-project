@@ -1,0 +1,32 @@
+schema {
+  query: QueryWithPolymorphic
+}
+
+type ArticleType {
+  id: String!
+  title: String!
+  body: String
+  type: String!
+  author: String
+}
+
+interface ContentInterface {
+  id: String!
+  title: String!
+  body: String
+  type: String!
+}
+
+type QueryWithPolymorphic {
+  allContent: [ContentInterface!]!
+  articles: [ArticleType!]!
+  videos: [VideoType!]!
+}
+
+type VideoType {
+  id: String!
+  title: String!
+  body: String
+  type: String!
+  durationSeconds: String
+}
